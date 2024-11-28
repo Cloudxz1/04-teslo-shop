@@ -11,4 +11,8 @@
 ```
 docker-compose up -d
 ```
-6. Levantar: ```npm start:dev```
+6. Cargar los datos con 
+```
+http://localhost:3000/api/seed
+```
+7. Levantar: ```npm start:dev```
