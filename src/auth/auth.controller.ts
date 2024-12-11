@@ -5,6 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from './decorators/get-user.decorator';
 import { User } from './entities/user.entity';
+import { RawHeaders } from './decorators/raw-headers.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -23,7 +24,8 @@ export class AuthController {
   testingPrivateRoute(
     @Param() request : Express.Request,
     @GetUser() user: User,
-    @GetUser('email') userEmail: string 
+    @GetUser('email') userEmail: string,
+    @RawHeaders() rawHeaders: string[],
   ){
 
     console.log(request);
@@ -31,7 +33,8 @@ export class AuthController {
       ok: true,
       message:'Hola Mundo Private',
       user,
-      userEmail
+      userEmail,
+      rawHeaders,
     }
   }
 }
