@@ -10,7 +10,9 @@ import { UserRoleGuard } from './guards/user-role/user-role.guard';
 import { RoleProtectedTs } from './decorators/role-protected.decorator';
 import { ValidRoles } from './interfaces/valid-roles.interface';
 import { Auth } from './decorators/auth.decorator';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -25,6 +27,7 @@ export class AuthController {
   }
   @Get('check-status')
   @Auth()
+  @ApiBearerAuth()
   checkAuthStatus(
     @GetUser() user: User
   ){

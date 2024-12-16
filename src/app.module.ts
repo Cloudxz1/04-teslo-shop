@@ -8,6 +8,7 @@ import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AuthModule } from './auth/auth.module';
+import { MessageWsModule } from './message-ws/message-ws.module';
 
 
 
@@ -34,6 +35,7 @@ import { AuthModule } from './auth/auth.module';
     SeedModule,
     FilesModule,
     AuthModule,
+    MessageWsModule,
   ],
 })
 export class AppModule {}
