@@ -25,9 +25,9 @@ export class MessageWsGateway implements OnGatewayConnection, OnGatewayDisconnec
       throw new WsException('Invalid credentials')
     }
 
-    console.log({payload});
+    // console.log({payload});
     // console.log('Cliente conectado', client.id);
-    this.messageWsService.registerClient(client);
+    this.messageWsService.registerClient(client, payload.id);
 
     this.wsServer.emit('clients-updated',this.messageWsService.getConnectedClients());
   }
