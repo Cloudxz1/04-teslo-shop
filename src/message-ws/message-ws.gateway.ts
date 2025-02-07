@@ -14,12 +14,13 @@ export class MessageWsGateway implements OnGatewayConnection, OnGatewayDisconnec
     private readonly jwtService: JwtService
   ) {}
   
-  handleConnection(client: Socket) {
+  async handleConnection(client: Socket) {
 
     const token = client.handshake.headers.authentication as string;
     let payload: JwtPayload;
     try{
       payload=this.jwtService.verify(token);
+      await this.messageWsService.registerClient(client, payload.id);
     }catch(error){
       client.disconnect();
       throw new WsException('Invalid credentials')
@@ -27,7 +28,7 @@ export class MessageWsGateway implements OnGatewayConnection, OnGatewayDisconnec
 
     // console.log({payload});
     // console.log('Cliente conectado', client.id);
-    this.messageWsService.registerClient(client, payload.id);
+    
 
     this.wsServer.emit('clients-updated',this.messageWsService.getConnectedClients());
   }
