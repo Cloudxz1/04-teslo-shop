@@ -50,7 +50,7 @@ export class MessageWsGateway implements OnGatewayConnection, OnGatewayDisconnec
     //  })
 
     this.wsServer.emit('message-from-server', {
-      fullName: 'soy yo',
+      fullName: this.messageWsService.getUserFullName(client.id),
       message:payload.message || 'no-message'
     })
   }
